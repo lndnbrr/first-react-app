@@ -5,6 +5,7 @@ import { useAuth } from '@/utils/context/authContext';
 import { useEffect, useState } from 'react';
 
 function Home() {
+  // Variable for initial useState. Introduces the initial value of uselessFact and the function setUselessFact.
   const [uselessFact, setUselessFact] = useState({});
 
   const { user } = useAuth();
@@ -23,13 +24,15 @@ function Home() {
       permalink: uselessFact.permalink,
       response: boolean,
     };
-    console.log(boolean, obj);
 
     // Function inside of selectedResponse() that displays the next random fact.
     fetchFact();
+
+    // TBD in future tutorial.
+    return obj;
   };
 
-  //
+  // React hook that passes two arguments. First argument is an anonymous function that has the function that displays a random fact within it. Second argument is an empty dependency array, which only lets fetchFact display one fact when the component is rendered and avoids displaying repeated random facts.
   useEffect(() => {
     fetchFact();
   }, []);
