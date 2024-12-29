@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-app-router-with-firebase-auth",
+  "name": "lb-random-useless-facts",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "prepare": "husky",
     "pre-commit": "next lint"
   },
+  "author": "Landon Borrego",
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "prettier --write",
