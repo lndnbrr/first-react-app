@@ -22,10 +22,10 @@ export default function NavBar() {
             <Link className="nav-link" href="/form">
               ➕ CREATE A FACT
             </Link>
-            <Link className="nav-link" href={`/response/${user.uid}?value=Yes`}>
+            <Link className="nav-link" href={`/response-yes/${user.uid}`}>
               ✅ YES
             </Link>
-            <Link className="nav-link" href={`/response/${user.uid}?value=No`}>
+            <Link className="nav-link" href={`/response-no/${user.uid}`}>
               ❌ NO
             </Link>
           </Nav>
