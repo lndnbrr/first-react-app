@@ -22,10 +22,14 @@ export default function NavBar() {
             <Link className="nav-link" href="/form">
               ➕ CREATE A FACT
             </Link>
-            <Link className="nav-link" href={`/response-yes/${user.uid}`}>
+
+            {/* Link element that uses a className(class) to keep styling consistent and href attribute to get the responses of a specific user where it searches for the value of the responses that are ONLY Yes.   */}
+            <Link className="nav-link" href={`/response/${user.uid}?value=Yes`}>
               ✅ YES
             </Link>
-            <Link className="nav-link" href={`/response-no/${user.uid}`}>
+
+            {/* Link element that uses a className(class) to keep styling consistent and href attribute to get the responses of a specific user where it searches for the value of the responses that are ONLY No.   */}
+            <Link className="nav-link" href={`/response/${user.uid}?value=No`}>
               ❌ NO
             </Link>
           </Nav>
