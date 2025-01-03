@@ -12,7 +12,7 @@ const initialState = {
 };
 
 // Form component that accepts a prop. The prop is that obj = initial state, which allows for a fact to stay present during the update process on the form. If the form passes a prop that contains content in the obj, then that content will be used in useState below. If the form does not pass any of that content through the obj prop, then the intialState will be blank like it was.
-export default function Form({ obj = initialState }) {
+export default function Form({ obj = initialState, func }) {
   // Variable that introduces the useAuth hook, a hook that allows the current user to be represented by the variable name.
   const { user } = useAuth();
 
@@ -51,6 +51,9 @@ export default function Form({ obj = initialState }) {
     if (factDetails.firebaseKey) {
       // Await statement that utilizes updateFact. So if true, then this will update the fact in its current state (factDetails) upon pressing the submit button.
       await updateFact(factDetails, 'Yes');
+
+      // Called Function that passed param of factDetails. So this func works by updating the localFact (found in Card.js) with factDetails (so factDetails = setLocalFact). It will keep the factDetails in the input and leave it for next time to be updated.
+      func(factDetails);
     }
 
     // Else statement with the logic: if the current state of the fact (factDetails) does not contain a firebaseKey, then create a fact.
@@ -98,4 +101,5 @@ export default function Form({ obj = initialState }) {
 // PropType declaration on obj. Considering that the prop obj is equal to intialState (an object) this is the proper format to declare.
 Form.propTypes = {
   obj: PropTypes.objectOf(initialState).isRequired,
+  func: PropTypes.string.isRequired,
 };
