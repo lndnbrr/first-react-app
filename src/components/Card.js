@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Form from './Form';
+import { deleteFact } from '../api/facts';
 
-// Component that, when rendered, creates a card for the fact.
-function FactCard({ fact }) {
+// Component that, when rendered, shows the current list of facts for either Yes responses or No responses.
+function FactCard({ fact, deleteFunc }) {
   // localFact = current state of fact.
   // setLocalFact = function to update localFact.
   // useState = manages state in functional components.
@@ -18,6 +19,13 @@ function FactCard({ fact }) {
   // useState = manages state in functional components.
   // false = useState will be false if in Read mode and true if in edit mode. false is the default value, meaning it will initally show the user that their in read mode.
   const [editMode, setEditMode] = useState(false);
+
+  // Function that uses API call to delete a fact, then update the DOM.
+  const deleteThisFact = () => {
+    // API call goes to the fact with this firebaseKey inside of the Yes valued data, and removed this fact from firebase DB. Then, it will update the page with all of the facts (no longer showing the previously deleted fact).
+    deleteFact(fact.firebaseKey, 'Yes').then(() => deleteFunc());
+  };
+
   return (
     <Card>
       <Card.Body>
@@ -42,7 +50,7 @@ function FactCard({ fact }) {
               <button className="btn btn-warning" type="button" onClick={() => setEditMode(true)}>
                 Edit Button
               </button>
-              <button className="btn btn-danger" type="button">
+              <button className="btn btn-danger" type="button" onClick={deleteThisFact}>
                 Delete Button
               </button>
             </div>
@@ -55,6 +63,7 @@ function FactCard({ fact }) {
 
 FactCard.propTypes = {
   fact: PropTypes.string.isRequired,
+  deleteFunc: PropTypes.string.isRequired,
 };
 
 export default FactCard;
