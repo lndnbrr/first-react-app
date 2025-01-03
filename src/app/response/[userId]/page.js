@@ -14,7 +14,7 @@ export default async function ResponsesPage({ params, searchParams }) {
       <div>
         {/* Object.values grabs the variable of facts, and changes it from the object of facts objects to the array of facts objects. Map goes to facts array, loops through each individual fact object (each object has a firebaseKey as an identifier) and selects the text from that fact object to display in FactCard component. */}
         {Object.values(facts).map((fact) => (
-          <FactCard key={fact.firebaseKey} fact={fact.text} />
+          <FactCard key={fact.firebaseKey} fact={fact} />
         ))}
       </div>
     </>
