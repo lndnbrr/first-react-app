@@ -35,7 +35,8 @@ function Home() {
     const response = await postFact(obj, value);
 
     // Await statement for API call. When a new object is created, it gives a name key with a firebaseKey value (its a name outside of the object, but it represents the object). So we just grab the firebaseKey value (response.name param) and make that become the value for our firebaseKey key that were updating into our object. The value param is what json firebase DB were routing to.
-    await updateFact(response.name, value);
+    // UPDATE: changed the response.name param to be {firebaseKey : response.name}. The logic here is that if we are attempting to update a fact, then there should already be a firebaseKey inside of the object. We made this change so then it also accepts the firebaseKey as apart of the payload.
+    await updateFact({ firebaseKey: response.name }, value);
 
     // We call this function inside of selectedResponse(), which will display the next random fact.
     fetchFact();

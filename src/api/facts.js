@@ -20,16 +20,18 @@ const postFact = async (obj, value) => {
 };
 
 // API call function that updates a random fact upon request (asynchronously). This adds a new key:value to the selected object.
-const updateFact = async (firebaseKey, value) => {
+// UPDATE: changed firebaseKey param to payload param. Did this so then we can update more than just the firebaseKey with this API call.
+const updateFact = async (payload, value) => {
   // Variable that houses await fetch statement. This statement grabs the Firebase DB URL (utilizing the value string to determine where the route goes AND the firebaseKey to determine which term to update) and adds the firebaseKey data in JSON format, in Firebase DB with the obj object.
-  const patch = await fetch(`${dbUrl}/response${value}/${firebaseKey}.json`, {
+  // UPDATE: added payload before firebaseKey. Did this considering that we need to access the firebaseKey, and since payload is acting like the name of the object now, we can dot notate into the firebaseKey value of its key.
+  const patch = await fetch(`${dbUrl}/response${value}/${payload.firebaseKey}.json`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      firebaseKey,
-    }),
+
+    // UPDATE: changed the object of {firebaseKey,} to payload. This was done so then we can modify more than just the firebaseKey
+    body: JSON.stringify(payload),
   });
 
   // Variable that takes the result of the patch variable and parses as .json()
